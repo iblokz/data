@@ -27,7 +27,14 @@ describe('obj', () =>
       expect(obj.sub({a: 1, b: {c: 2}}, 'b')).to.deep.equal({c: 2}))
     &&
     it('should return false if no match', () =>
-      expect(obj.sub({a: 1}, 'b')).to.equal(false)))
+			expect(obj.sub({a: 1}, 'b')).to.equal(false))
+		&&
+    it('should return null for sub object', () =>
+			expect(obj.sub({a: null}, 'a')).to.equal(null))
+		&&
+    it('should return 0 for sub object', () =>
+			expect(obj.sub({a: 0}, 'a')).to.equal(0))
+	)
   &&
   describe('patch', () =>
     it('patches a property based on a path string', () =>
@@ -50,4 +57,16 @@ describe('obj', () =>
     it('preserves the sub objects prototype', () =>
       expect(obj.patch({a: new Date()}, ['a', 'b', 'c'], 2)['a'])
         .to.be.an.instanceof(Date)
-        .and.to.include.keys('b'))));
+				.and.to.include.keys('b')))
+	&&
+	describe('switch', () =>
+    it('returns a case for matched value', () =>
+			expect(obj.switch('b', {a: 1, b: 3, c: 4})).to.equal(3))
+		&&
+    it('returns a default case for unmatched value', () =>
+			expect(obj.switch('b', {a: 2, c: 7, default: 4})).to.equal(4))
+		&&
+    it('returns false if not matched and no default value', () =>
+			expect(obj.switch('b', {a: 1, c: 4})).to.equal(false))
+	)
+);

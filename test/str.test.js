@@ -5,6 +5,13 @@ const expect = require('chai').expect;
 const str = require('../lib/str');
 
 describe('str', () =>
+	describe('capitalize', () =>
+    it('should capitalize firt character', () =>
+      expect(
+        str.capitalize('bahamas')
+      ).to.equal('Bahamas')
+		)
+	),
   describe('toCamelCase', () =>
     it('should convert dash separated str to camelcase', () =>
       expect(
