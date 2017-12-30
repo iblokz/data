@@ -4,11 +4,10 @@ const expect = require('chai').expect;
 
 const obj = require('../lib/obj');
 
-describe('obj', () =>
+describe('obj', () => (
   describe('keyValue', () =>
     it('creates a new object with key and value provided in the arguments', () =>
-      expect(obj.keyValue('foo', 'bar')).to.deep.equal({foo: 'bar'})))
-  &&
+      expect(obj.keyValue('foo', 'bar')).to.deep.equal({foo: 'bar'}))),
   describe('clone', () =>
     it('creates a new object of the same type as passed in object', () =>
       expect(obj.clone(new Date(2017, 1, 1))).to.be.an.instanceof(Date))
@@ -17,8 +16,7 @@ describe('obj', () =>
       expect(obj.clone({a: 1, b: {c: 2}})).to.deep.equal({a: 1, b: {c: 2}}))
     &&
     it('with subelements preserving their prototype', () =>
-      expect(obj.clone({foo: {bar: new Date(2016)}})['foo']['bar']).to.be.an.instanceof(Date)))
-  &&
+      expect(obj.clone({foo: {bar: new Date(2016)}})['foo']['bar']).to.be.an.instanceof(Date))),
   describe('sub', () =>
     it('returns a sub property on an object tree based on provided path array', () =>
       expect(obj.sub({foo: {bar: new Date(2016)}}, ['foo', 'bar'])).to.be.an.instanceof(Date))
@@ -26,16 +24,15 @@ describe('obj', () =>
     it('also works with single path string', () =>
       expect(obj.sub({a: 1, b: {c: 2}}, 'b')).to.deep.equal({c: 2}))
     &&
-    it('should return false if no match', () =>
-			expect(obj.sub({a: 1}, 'b')).to.equal(false))
+    it('should return undefined if no match', () =>
+			expect(obj.sub({a: 1}, 'b')).to.equal(undefined))
 		&&
     it('should return null for sub object', () =>
 			expect(obj.sub({a: null}, 'a')).to.equal(null))
 		&&
     it('should return 0 for sub object', () =>
 			expect(obj.sub({a: 0}, 'a')).to.equal(0))
-	)
-  &&
+	),
   describe('patch', () =>
     it('patches a property based on a path string', () =>
       expect(obj.patch({a: 1, b: 3}, 'b', 2)).to.deep.equal({a: 1, b: 2}))
@@ -57,8 +54,7 @@ describe('obj', () =>
     it('preserves the sub objects prototype', () =>
       expect(obj.patch({a: new Date()}, ['a', 'b', 'c'], 2)['a'])
         .to.be.an.instanceof(Date)
-				.and.to.include.keys('b')))
-	&&
+				.and.to.include.keys('b'))),
 	describe('switch', () =>
     it('returns a case for matched value', () =>
 			expect(obj.switch('b', {a: 1, b: 3, c: 4})).to.equal(3))
@@ -68,5 +64,23 @@ describe('obj', () =>
 		&&
     it('returns false if not matched and no default value', () =>
 			expect(obj.switch('b', {a: 1, c: 4})).to.equal(false))
-	)
-);
+	),
+	describe('reduce', () => (
+		it('performs an array type reduce operation on an object', () =>
+			expect(obj.reduce({a: 1}, (b, k, v) => Object.assign(b, {[k]: v + 1}), {}))
+				.to.deep.equal({a: 2})
+		)
+	)),
+	describe('map', () => (
+		it('performs an array type map operation on an object', () =>
+			expect(obj.map({a: 1}, (k, v) => v + 1))
+				.to.deep.equal({a: 2})
+		)
+	)),
+	describe('filter', () => (
+		it('performs an array type filter operation on an object', () =>
+			expect(obj.filter({a: 1, b: 3, c: 2}, (k, v) => k !== 'b'))
+				.to.deep.equal({a: 1, c: 2})
+		)
+	))
+));

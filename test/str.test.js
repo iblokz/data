@@ -71,8 +71,8 @@ describe('str', () =>
   describe('toDocumentId', () =>
     it('should convert dash separated collection name to camelcase document id', () =>
       expect(
-        str.toDocumentId('user-comments')
-      ).to.equal(':userCommentId')
+        str.toDocumentId('user-comments', '-')
+      ).to.equal('userCommentId')
     )
   )
 );
