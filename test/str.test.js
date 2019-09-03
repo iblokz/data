@@ -4,75 +4,51 @@ const expect = require('chai').expect;
 
 const str = require('../lib/str');
 
-describe('str', () =>
+describe('str', () => (
 	describe('capitalize', () =>
     it('should capitalize firt character', () =>
       expect(
         str.capitalize('bahamas')
-      ).to.equal('Bahamas')
-		)
-	),
-  describe('toCamelCase', () =>
+      ).to.equal('Bahamas'))),
+  describe('toCamelCase', () => (
     it('should convert dash separated str to camelcase', () =>
       expect(
         str.toCamelCase('inch-high-private-eye', '-')
-      ).to.equal('inchHighPrivateEye')
-    )
-    &&
+      ).to.equal('inchHighPrivateEye')),
     it('should convert by default underscore separated str to camelcase', () =>
       expect(
         str.toCamelCase('inch_high_private_eye')
-      ).to.equal('inchHighPrivateEye')
-    )
-  )
-  &&
-  describe('fromCamelCase', () =>
+      ).to.equal('inchHighPrivateEye')))),
+  describe('fromCamelCase', () => (
     it('should convert camelcase str to dash separated', () =>
       expect(
         str.fromCamelCase('inchHighPrivateEye', '-')
-      ).to.equal('inch-high-private-eye')
-    )
-    &&
+      ).to.equal('inch-high-private-eye')),
     it('should convert by default camelcase str to underscore separated', () =>
       expect(
         str.fromCamelCase('inchHighPrivateEye')
-      ).to.equal('inch_high_private_eye')
-    )
-  )
-  &&
-  describe('singularToPlural', () =>
+      ).to.equal('inch_high_private_eye')))),
+  describe('singularToPlural', () => (
     it('should convert to plural normal strings', () =>
       expect(
         str.singularToPlural('task', '-')
-      ).to.equal('tasks')
-    )
-    &&
+      ).to.equal('tasks')),
     it('should convert to plural strings ending in y', () =>
       expect(
         str.singularToPlural('company', '-')
-      ).to.equal('companies')
-    )
-  )
-  &&
-  describe('pluralToSingular', () =>
+      ).to.equal('companies')))),
+  describe('pluralToSingular', () => (
     it('should convert to singular normal strings', () =>
       expect(
         str.pluralToSingular('tasks', '-')
-      ).to.equal('task')
-    )
-    &&
+      ).to.equal('task')),
     it('should convert to singular strings ending in ..ies', () =>
       expect(
         str.pluralToSingular('companies', '-')
-      ).to.equal('company')
-    )
-  )
-  &&
+      ).to.equal('company')))),
   describe('toDocumentId', () =>
     it('should convert dash separated collection name to camelcase document id', () =>
       expect(
-        str.toDocumentId('user-comments', '-')
-      ).to.equal('userCommentId')
-    )
-  )
-);
+        str.toDocumentId('user-comments', '-', 'Id', '')
+      ).to.equal('userCommentId')))
+));

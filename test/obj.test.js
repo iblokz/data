@@ -8,6 +8,13 @@ describe('obj', () => (
   describe('keyValue', () =>
     it('creates a new object with key and value provided in the arguments', () =>
       expect(obj.keyValue('foo', 'bar')).to.deep.equal({foo: 'bar'}))),
+	describe('isLiteral', () => (
+		it('verifies that an object is literal', () =>
+			expect(obj.isLiteral({foo: 'bar'})).to.equal(true)),
+		it('returns false if the object has a different constructor form Object', () =>
+			expect(obj.isLiteral(new Date(2017, 1, 1))).to.equal(false)),
+		it('returns false if the object is null', () =>
+			expect(obj.isLiteral(null)).to.equal(false)))),
   describe('clone', () =>
     it('creates a new object of the same type as passed in object', () =>
       expect(obj.clone(new Date(2017, 1, 1))).to.be.an.instanceof(Date))
@@ -55,16 +62,6 @@ describe('obj', () => (
       expect(obj.patch({a: new Date()}, ['a', 'b', 'c'], 2)['a'])
         .to.be.an.instanceof(Date)
 				.and.to.include.keys('b'))),
-	describe('switch', () =>
-    it('returns a case for matched value', () =>
-			expect(obj.switch('b', {a: 1, b: 3, c: 4})).to.equal(3))
-		&&
-    it('returns a default case for unmatched value', () =>
-			expect(obj.switch('b', {a: 2, c: 7, default: 4})).to.equal(4))
-		&&
-    it('returns false if not matched and no default value', () =>
-			expect(obj.switch('b', {a: 1, c: 4})).to.equal(false))
-	),
 	describe('reduce', () => (
 		it('performs an array type reduce operation on an object', () =>
 			expect(obj.reduce({a: 1}, (b, k, v) => Object.assign(b, {[k]: v + 1}), {}))
@@ -82,5 +79,19 @@ describe('obj', () => (
 			expect(obj.filter({a: 1, b: 3, c: 2}, (k, v) => k !== 'b'))
 				.to.deep.equal({a: 1, c: 2})
 		)
+	)),
+	describe('traverse', () => (
+		it('traverses an object with an array type map operation', () =>
+			expect(obj.traverse({a: 1, b: {c: 3}}, (k, v) => v + 1))
+				.to.deep.equal({a: 2, b: {c: 4}})
+		)
+	)),
+	describe('switch', () => (
+    it('returns a case for matched value', () =>
+			expect(obj.switch('b', {a: 1, b: 3, c: 4})).to.equal(3)),
+    it('returns a default case for unmatched value', () =>
+			expect(obj.switch('b', {a: 2, c: 7, default: 4})).to.equal(4)),
+    it('returns false if not matched and no default value', () =>
+			expect(obj.switch('b', {a: 1, c: 4})).to.equal(false))
 	))
 ));
