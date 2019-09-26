@@ -39,6 +39,24 @@ describe('obj', () => (
 		&&
     it('should return 0 for sub object', () =>
 			expect(obj.sub({a: 0}, 'a')).to.equal(0))
+		&&
+		it('returns undefined when a value of undefined and a path string are provided', () =>
+			expect(obj.sub(undefined, 'bar')).to.equal(undefined))
+		&&
+		it('returns undefined when a value of null and a path string are provided', () =>
+			expect(obj.sub(null, 'bar')).to.equal(undefined))
+		&&
+		it('returns undefined when a value of undefined and a path array are provided', () =>
+			expect(obj.sub(undefined, ['foo', 'bar'])).to.equal(undefined))
+		&&
+		it('returns undefined when a value of null and a path array are provided', () =>
+			expect(obj.sub(null, ['foo', 'bar'])).to.equal(undefined))
+		&&
+		it('returns undefined when any of the properties in the path is undefined and a path array is provided', () =>
+			expect(obj.sub({foo: {}}, ['foo', 'bar', 'baz', 'qux'])).to.equal(undefined))
+		&&
+		it('returns undefined when any of the properties in the path is null and a path array is provided', () =>
+			expect(obj.sub({foo: {bar: null}}, ['foo', 'bar', 'baz', 'qux'])).to.equal(undefined))
 	),
   describe('patch', () =>
     it('patches a property based on a path string', () =>
