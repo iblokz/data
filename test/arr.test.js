@@ -22,4 +22,18 @@ describe('arr', () =>
 			&&
 			expect(arr.toggle(['foo', 'baz'], 'bar')).to.deep.equal(['foo', 'baz', 'bar'])
 		))
+	&&
+	describe('contains', () =>
+		it('Returns true if an array contains an element', () =>
+			expect(arr.contains(['bar', 'foo'], 'foo')).to.equal(true))
+		&&
+		it('Returns false if an array does not contain an element', () =>
+			expect(arr.contains(['bar', 'foo'], 'baz')).to.equal(false))
+		&&
+		it('Converts csv string to an array if provided', () =>
+			expect(arr.contains('bar,foo', 'foo')).to.equal(true))
+		&&
+		it('Treats other variable types as an empty array', () =>
+			expect(arr.contains({foo: 'bar'}, 'foo')).to.equal(false))
+		)
 );

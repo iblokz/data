@@ -4,6 +4,18 @@ const expect = require('chai').expect;
 
 const obj = require('../lib/obj');
 
+// mock object to be used in chainCall test
+const ValAdd = function(val) {
+	this.val = val;
+};
+ValAdd.prototype.add = function(val) {
+	this.val += val;
+	return this;
+};
+ValAdd.prototype.sum = function() {
+	return this.val;
+};
+
 describe('obj', () => (
   describe('keyValue', () =>
     it('creates a new object with key and value provided in the arguments', () =>
@@ -102,6 +114,12 @@ describe('obj', () => (
 		it('traverses an object with an array type map operation', () =>
 			expect(obj.traverse({a: 1, b: {c: 3}}, (k, v) => v + 1))
 				.to.deep.equal({a: 2, b: {c: 4}})
+		)
+	)),
+	describe('chainCall', () => (
+		it('consecutively calls methods of an object that return the new state of that object', () =>
+			expect(obj.chainCall(new ValAdd(1), [['add', 1], ['add', 2], ['sum']]))
+				.to.equal(4)
 		)
 	)),
 	describe('switch', () => (

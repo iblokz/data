@@ -6,7 +6,7 @@ const str = require('../lib/str');
 
 describe('str', () => (
 	describe('capitalize', () =>
-    it('should capitalize firt character', () =>
+    it('should capitalize first character', () =>
       expect(
         str.capitalize('bahamas')
       ).to.equal('Bahamas'))),
@@ -50,5 +50,9 @@ describe('str', () => (
     it('should convert dash separated collection name to camelcase document id', () =>
       expect(
         str.toDocumentId('user-comments', '-', 'Id', '')
+      ).to.equal('userCommentId')),
+		it('converts by default underscore separated collection name to camelcase document id', () =>
+      expect(
+        str.toDocumentId('user_comments')
       ).to.equal('userCommentId')))
 ));
