@@ -1,6 +1,6 @@
 {
   "name": "iblokz-data",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "immutable data utilities",
   "main": "index.js",
   "scripts": {
