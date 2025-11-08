@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/iblokz-data.svg)](https://badge.fury.io/js/iblokz-data)
 [![CI](https://github.com/iblokz/data/workflows/CI/badge.svg)](https://github.com/iblokz/data/actions)
-[![codecov](https://codecov.io/gh/iblokz/data/branch/master/graph/badge.svg)](https://codecov.io/gh/iblokz/data)
+[![codecov](https://codecov.io/gh/iblokz/data/graph/badge.svg)](https://codecov.io/gh/iblokz/data)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/docs-github%20pages-blue)](https://iblokz.github.io/data/)
 
