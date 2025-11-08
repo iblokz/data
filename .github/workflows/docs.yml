@@ -40,7 +40,11 @@ jobs:
       run: npm run docs
     
     - name: Generate HTML docs with JSDoc
-      run: npx jsdoc -c .jsdoc.json
+      run: |
+        npx jsdoc -c .jsdoc.json
+        
+        # Inject custom theme CSS into JSDoc HTML files
+        find _site/api -name "*.html" -type f -exec sed -i 's|</head>|<link rel="stylesheet" href="../jsdoc-theme.css"></head>|' {} \;
     
     - name: Convert markdown to HTML
       run: |
@@ -62,11 +66,14 @@ jobs:
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>${title} - iblokz-data</title>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-light.min.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
           <style>
             :root {
               --bg-color: #ffffff;
               --text-color: #24292f;
               --border-color: #d0d7de;
+              --code-bg: #f6f8fa;
             }
             
             @media (prefers-color-scheme: dark) {
@@ -74,6 +81,7 @@ jobs:
                 --bg-color: #0d1117;
                 --text-color: #c9d1d9;
                 --border-color: #30363d;
+                --code-bg: #161b22;
               }
             }
             
@@ -94,10 +102,21 @@ jobs:
               color: var(--text-color);
             }
             
+            /* Code block styling */
+            .markdown-body pre {
+              background-color: var(--code-bg) !important;
+            }
+            
+            .markdown-body code {
+              background-color: var(--code-bg);
+            }
+            
             @media (max-width: 767px) { 
               body { padding: 15px; } 
             }
           </style>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+          <script>hljs.highlightAll();</script>
         </head>
         <body>
           <article class="markdown-body">
@@ -119,6 +138,9 @@ jobs:
         # Copy converted HTML files
         cp README.html _site/
         cp API.html _site/
+        
+        # Copy JSDoc theme CSS
+        cp jsdoc-theme.css _site/
         
         # Also keep original .md files for direct access
         cp README.md _site/
