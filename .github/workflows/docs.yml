@@ -41,10 +41,11 @@ jobs:
     
     - name: Generate HTML docs with JSDoc
       run: |
-        npx jsdoc -c .jsdoc.json
+        npx jsdoc -c jsdoc/config.json
         
-        # Inject custom theme CSS into JSDoc HTML files
-        find _site/api -name "*.html" -type f -exec sed -i 's|</head>|<link rel="stylesheet" href="../jsdoc-theme.css"></head>|' {} \;
+        # Inject custom theme CSS inline into JSDoc HTML files
+        THEME_CSS=$(cat jsdoc/theme.css)
+        find _site/api -name "*.html" -type f -exec sh -c 'sed -i "s|</head>|<style>/* JSDoc custom theme */\n'"$THEME_CSS"'</style>\n</head>|" "$1"' _ {} \;
     
     - name: Convert markdown to HTML
       run: |
@@ -165,9 +166,6 @@ jobs:
         # Copy converted HTML files
         cp README.html _site/
         cp API.html _site/
-        
-        # Copy JSDoc theme CSS
-        cp jsdoc-theme.css _site/
         
         # Also keep original .md files for direct access
         cp README.md _site/

@@ -12,7 +12,10 @@
     "test": "nyc mocha --colors test/**/*",
     "docs": "jsdoc2md lib/**/*.js > API.md",
     "docs:watch": "nodemon --watch lib --exec 'npm run docs'",
-    "docs:html": "jsdoc -c .jsdoc.json",
+    "docs:html": "jsdoc -c jsdoc/config.json",
+    "docs:site": "node jsdoc/build-docs.js",
+    "docs:serve": "serve _site -p 8080",
+    "docs:preview": "npm run docs:site && npm run docs:serve",
     "prepare": "husky install",
     "prepublishOnly": "npm test && npm run lint && npm run docs",
     "version": "npm run docs && git add API.md",
@@ -51,7 +54,8 @@
     "jsdoc-to-markdown": "^8.0.0",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.2",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "serve": "^14.2.5"
   },
   "keywords": [
     "immutable",
