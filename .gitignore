@@ -1,6 +1,14 @@
-node_modules
+node_modules/
+coverage/
+.nyc_output/
+_site/
+*.log
+.DS_Store
+.env
 
-# nyc
-.nyc_output
-coverage
-package-lock.json
+# Session notes and summaries (local only)
+.notes/
+
+# Keep API.md but ignore generated HTML docs
+# docs/ folder contains markdown docs (keep it)
+# _site/ contains generated site (ignore it)

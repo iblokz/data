@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Run linter
+echo "📝 Running linter..."
+npm run lint || {
+  echo "❌ Linting failed. Please fix the errors above."
+  exit 1
+}
+
+# Run tests
+echo "🧪 Running tests..."
+npm test || {
+  echo "❌ Tests failed. Please fix the failing tests."
+  exit 1
+}
+
+# Generate documentation
+echo "📚 Generating documentation..."
+npm run docs || {
+  echo "❌ Documentation generation failed."
+  exit 1
+}
+
+# Check if docs changed and stage them
+if ! git diff --quiet API.md 2>/dev/null; then
+  echo "📄 API.md was updated, adding to commit..."
+  git add API.md
+fi
+
+echo "✅ Pre-commit checks passed!"
+

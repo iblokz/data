@@ -3,9 +3,17 @@
   "version": "1.5.0",
   "description": "immutable data utilities",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "lint": "eslint lib",
-    "test": "nyc mocha --colors test/**/*"
+    "test": "nyc mocha --colors test/**/*",
+    "docs": "jsdoc2md lib/**/*.js > API.md",
+    "docs:watch": "nodemon --watch lib --exec 'npm run docs'",
+    "docs:html": "jsdoc -c .jsdoc.json",
+    "prepare": "husky install",
+    "prepublishOnly": "npm test && npm run lint && npm run docs",
+    "version": "npm run docs && git add API.md",
+    "postversion": "git push && git push --tags"
   },
   "nyc": {
     "include": [
@@ -32,10 +40,26 @@
   },
   "homepage": "https://github.com/iblokz/data#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^3.3.1",
-    "eslint-config-google": "^0.6.0",
-    "mocha": "^3.2.0",
-    "nyc": "^10.1.2"
-  }
+    "chai": "^4.3.10",
+    "eslint": "^8.56.0",
+    "eslint-config-google": "^0.14.0",
+    "husky": "^8.0.3",
+    "jsdoc": "^4.0.2",
+    "jsdoc-to-markdown": "^8.0.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.2",
+    "nyc": "^15.1.0"
+  },
+  "keywords": [
+    "immutable",
+    "data",
+    "utilities",
+    "functional",
+    "array",
+    "object",
+    "string",
+    "fp",
+    "utility",
+    "helpers"
+  ]
 }
