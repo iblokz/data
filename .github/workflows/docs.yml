@@ -111,6 +111,33 @@ jobs:
               background-color: var(--code-bg);
             }
             
+            /* Table styling */
+            .markdown-body table {
+              background-color: var(--bg-color);
+              border-color: var(--border-color);
+            }
+            
+            .markdown-body table tr {
+              background-color: var(--bg-color);
+              border-color: var(--border-color);
+            }
+            
+            .markdown-body table tr:nth-child(2n) {
+              background-color: var(--code-bg);
+            }
+            
+            .markdown-body table th,
+            .markdown-body table td {
+              background-color: transparent;
+              border-color: var(--border-color);
+              color: var(--text-color);
+            }
+            
+            .markdown-body table th {
+              font-weight: 600;
+              color: var(--text-color);
+            }
+            
             @media (max-width: 767px) { 
               body { padding: 15px; } 
             }
