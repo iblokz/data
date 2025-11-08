@@ -41,7 +41,7 @@ a {
 
 nav {
   background-color: var(--nav-bg) !important;
-  border-right: 1px solid var(--border-color) !important;
+  border-left: 1px solid var(--border-color) !important;
 }
 
 nav ul, nav li {
@@ -55,6 +55,10 @@ nav ul, nav li {
 pre, code {
   background-color: var(--code-bg) !important;
   color: var(--text-color) !important;
+}
+
+pre.source {
+	border: 1px solid var(--border-color);
 }
 
 table {
@@ -82,3 +86,6 @@ dt, dd {
   color: var(--text-secondary) !important;
 }
 
+section {
+	background: inherit;
+}
