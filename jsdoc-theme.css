@@ -29,6 +29,11 @@
 body {
   background-color: var(--bg-color) !important;
   color: var(--text-color) !important;
+  margin: 0px;
+}
+
+section {
+  background-color: var(--bg-color) !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -86,6 +91,4 @@ dt, dd {
   color: var(--text-secondary) !important;
 }
 
-section {
-	background: inherit;
-}
+
