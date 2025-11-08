@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Enhanced ESLint config to respect project standards (tabs, JSDoc style)
   - Updated .gitignore for generated files and local notes
   - Organized documentation structure (docs/ folder + .notes/ for local summaries)
+  - **Node.js requirement: Now requires Node.js 16+ (dropped Node 14 support)**
 
 ### Fixed
 - All security vulnerabilities (35 → 0)

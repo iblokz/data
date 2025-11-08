@@ -15,6 +15,7 @@ A lightweight, functional JavaScript library providing immutable data manipulati
 - 📦 **Zero dependencies** - Lightweight and production-ready
 - 📝 **Full JSDoc annotations** - Complete type hints and documentation
 - ✅ **Well-tested** - Comprehensive test coverage
+- 🚀 **Modern Node.js** - Supports Node.js 16+
 
 ## Installation
 
