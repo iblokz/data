@@ -26,6 +26,8 @@ Array utilities for immutable operations
     * [.remove(arr, item)](#module_arr.remove) ⇒ <code>Array</code>
     * [.toggle(arr, item)](#module_arr.toggle) ⇒ <code>Array</code>
     * [.contains(a, el)](#module_arr.contains) ⇒ <code>boolean</code>
+    * [.reorder(arr, from, to)](#module_arr.reorder) ⇒ <code>Array</code>
+    * [.patch(arr, index, v)](#module_arr.patch) ⇒ <code>Array</code>
 
 <a name="module_arr.add"></a>
 
@@ -99,6 +101,53 @@ Checks if an array or comma-separated string contains an element.
 contains([1, 2, 3], 2) // => true
 contains('a,b,c', 'b') // => true
 contains([1, 2, 3], 4) // => false
+```
+<a name="module_arr.reorder"></a>
+
+### arr.reorder(arr, from, to) ⇒ <code>Array</code>
+Immutably reorders an array by moving an item from one index to another.
+
+**Kind**: static method of [<code>arr</code>](#module_arr)  
+**Returns**: <code>Array</code> - A new array with the item moved  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array</code> | The source array |
+| from | <code>number</code> | The index of the item to move |
+| to | <code>number</code> | The index to move the item to |
+
+**Example**  
+```js
+reorder(['a', 'b', 'c', 'd', 'e'], 2, 1) // => ['a', 'c', 'b', 'd', 'e']
+reorder(['a', 'b', 'c', 'd', 'e'], 3, 1) // => ['a', 'd', 'b', 'c', 'e']
+reorder(['a', 'b', 'c', 'd', 'e'], 1, 3) // => ['a', 'c', 'd', 'b', 'e']
+reorder(['a', 'b', 'c', 'd', 'e'], 3, 3) // => ['a', 'b', 'c', 'd', 'e'] // no change
+```
+<a name="module_arr.patch"></a>
+
+### arr.patch(arr, index, v) ⇒ <code>Array</code>
+Immutably patches an array at a given index.
+
+**Kind**: static method of [<code>arr</code>](#module_arr)  
+**Returns**: <code>Array</code> - A new array with the patch applied  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array</code> | The source array |
+| index | <code>number</code> | The index to patch |
+| v | <code>Object</code> \| <code>function</code> | The patch value to apply |
+
+**Example**  
+```js
+// Patch with object (merges with existing object)
+patch([{a: 1}, {b: 2}], 0, {c: 3}) // => [{a: 1, c: 3}, {b: 2}]
+
+// Patch with function updater
+patch([{count: 1}, {count: 2}], 0, (item) => ({...item, count: item.count + 1}))
+// => [{count: 2}, {count: 2}]
+
+// Patch at index beyond array length (extends array with undefined)
+patch([1, 2], 5, 3) // => [1, 2, undefined, undefined, undefined, 3]
 ```
 <a name="module_fn"></a>
 
