@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-01-12
+
 ### Added
 - `arr.reorder(arr, from, to)` - Immutably reorders an array by moving an item from one index to another
 - `arr.patch(arr, index, patch)` - Immutably patches an array element at a given index (supports object merging and function updaters)
